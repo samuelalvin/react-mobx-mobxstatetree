@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import App from "./app/app"
 import { Provider } from "mobx-react";
 
-import ProjectStore, { IProject } from "./store/projectstore";
+import ProjectStore, { IProject } from "./store/project-store";
 
 const projectStore = ProjectStore.create({
     projects: [{
