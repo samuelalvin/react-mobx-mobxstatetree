@@ -9,5 +9,6 @@ describe("app", function () {
 
         let result = renderer.getRenderOutput();
         expect(result).toBeDefined();
+        expect(result.type).toMatch("div");
     });
 });

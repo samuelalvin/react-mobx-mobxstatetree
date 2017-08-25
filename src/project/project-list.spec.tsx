@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as TestUtils from "react-dom/test-utils";
 import * as ReactShallowRenderer from "react-test-renderer/shallow";
-import ProjectList from "./project-list";
+import ProjectList, { IProjectListProps } from "./project-list";
 import ProjectStore, { IProject } from "../store/project-store";
 
 const projectStore = ProjectStore.create({
@@ -14,8 +14,15 @@ const projectStore = ProjectStore.create({
 
 describe("project-list", function () {
     it("should be created without any problem", function () {
-        let app = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
-        expect(app).toBeDefined();
+        let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
+        expect(projectList).toBeDefined();
+    });
+
+    it("should include projectList", function () {
+        let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
+        let projectListProps = projectList.props as IProjectListProps;
+        expect(projectListProps.projectStore.projects).toBeDefined();
+        expect(projectListProps.projectStore.projects.length).toBeGreaterThan(0);
     });
 
     it("should be rendered without any problem", function () {
@@ -24,5 +31,6 @@ describe("project-list", function () {
 
         let result = renderer.getRenderOutput();
         expect(result).toBeDefined();
+        expect(result.type).toMatch("ul");
     });
 });

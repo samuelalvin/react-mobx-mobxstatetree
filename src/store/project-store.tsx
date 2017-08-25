@@ -7,7 +7,7 @@ export interface IProject {
     isActive: boolean
 }
 
-const Project = types.model("Project", {
+export const Project = types.model("Project", {
     id: types.number,
     name: types.string,
     isActive: types.optional(types.boolean, false)

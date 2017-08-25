@@ -2,8 +2,9 @@ import * as React from "react";
 import { observer, inject } from "mobx-react";
 
 import ProjectStore from "../store/project-store";
+import ProjectDetails from "./project-details";
 
-interface IProjectListProps {
+export interface IProjectListProps {
     projectStore?: typeof ProjectStore.Type
 }
 
@@ -14,7 +15,7 @@ class ProjectList extends React.Component<IProjectListProps> {
         const { projectStore } = this.props;
         return (
             <ul>
-                {projectStore.projects.map((project) => (<li key={project.id}>{project.name} - {project.isActive ? "active" : "inactive"}</li>))}
+                {projectStore.projects.map((project) => (<ProjectDetails key={project.id} project={project}></ProjectDetails>))}
             </ul>
         );
     }
