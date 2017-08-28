@@ -1,11 +1,7 @@
 import * as React from "react";
 import ProjectList from "../project/project-list";
 
-interface IProps {
-    testText?: string
-}
-
-class App extends React.Component<IProps> {
+class App extends React.Component {
     render() {
         return (
             <div>
