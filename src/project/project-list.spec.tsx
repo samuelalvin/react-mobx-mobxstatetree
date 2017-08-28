@@ -18,13 +18,6 @@ describe("project-list", function () {
         expect(projectList).toBeDefined();
     });
 
-    it("should include projectList", function () {
-        let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
-        let projectListProps = projectList.props as IProjectListProps;
-        expect(projectListProps.projectStore.projects).toBeDefined();
-        expect(projectListProps.projectStore.projects.length).toBeGreaterThan(0);
-    });
-
     it("should be rendered without any problem", function () {
         let renderer = ReactShallowRenderer.createRenderer();
         renderer.render(<ProjectList projectStore={projectStore}></ProjectList>);
@@ -32,5 +25,12 @@ describe("project-list", function () {
         let result = renderer.getRenderOutput();
         expect(result).toBeDefined();
         expect(result.type).toMatch("ul");
+    });
+
+    it("should display projects", function(){
+        let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
+        var projects = TestUtils.scryRenderedDOMComponentsWithTag(projectList, "li");
+        console.log(projects[0].children);
+        expect(projects.length).toEqual(projectStore.projects.length);
     });
 });
