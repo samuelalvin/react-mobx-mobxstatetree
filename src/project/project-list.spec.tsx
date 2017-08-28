@@ -29,8 +29,7 @@ describe("project-list", function () {
 
     it("should display projects", function(){
         let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
-        var projects = TestUtils.scryRenderedDOMComponentsWithTag(projectList, "li");
-        console.log(projects[0].children);
+        let projects = TestUtils.scryRenderedDOMComponentsWithTag(projectList, "li");
         expect(projects.length).toEqual(projectStore.projects.length);
     });
 });
