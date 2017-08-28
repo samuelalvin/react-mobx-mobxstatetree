@@ -1,12 +1,6 @@
 import { IObservableArray } from "mobx";
 import { types } from "mobx-state-tree";
 
-export interface IProject {
-    id: number,
-    name: string,
-    isActive: boolean
-}
-
 export const Project = types.model("Project", {
     id: types.number,
     name: types.string,
@@ -25,27 +19,11 @@ export const Project = types.model("Project", {
         self.isActive = !self.isActive;
     }
 }));
-const getUniqueProjectId = (projects: IObservableArray<typeof Project.Type>) => {
-    let id = projects
-    .map(project => project.id)
-    .reduce((previousId, currentId, currentIndex) => {
-        if (currentId == currentIndex) {
-            return previousId;
-        } else {
-            return currentIndex;
-        }
-    });
 
-    if (projects.find(project => project.id == id)) {
-        id = projects.length;
-    }
-
-    return id;
-};
 const ProjectStore = types.model("ProjectStore", {
     projects: types.array(Project)
 }).actions((self) => ({
-    addProject(newProject: IProject) {
+    addProject(newProject: typeof Project.Type) {
         if (!newProject.name || newProject.name.length == 0) {
             alert("ProjectStore Model Action Error: new project name should not be empty");
             return;
@@ -69,5 +47,23 @@ const ProjectStore = types.model("ProjectStore", {
         self.projects.splice(index, 1);
     }
 }));
+
+const getUniqueProjectId = (projects: IObservableArray<typeof Project.Type>) => {
+    let id = projects
+    .map(project => project.id)
+    .reduce((previousId, currentId, currentIndex) => {
+        if (currentId == currentIndex) {
+            return previousId;
+        } else {
+            return currentIndex;
+        }
+    });
+
+    if (projects.find(project => project.id == id)) {
+        id = projects.length;
+    }
+
+    return id;
+};
 
 export default ProjectStore;

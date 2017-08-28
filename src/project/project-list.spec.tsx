@@ -2,14 +2,14 @@ import * as React from "react";
 import * as TestUtils from "react-dom/test-utils";
 import * as ReactShallowRenderer from "react-test-renderer/shallow";
 import ProjectList, { IProjectListProps } from "./project-list";
-import ProjectStore, { IProject } from "../store/project-store";
+import ProjectStore, { Project } from "../store/project-store";
 
 const projectStore = ProjectStore.create({
     projects: [{
         id: 0,
         name: "debugProject1",
         isActive: true
-    } as IProject]
+    } as typeof Project.Type]
 });
 
 describe("project-list", function () {
