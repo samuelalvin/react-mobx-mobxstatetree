@@ -6,7 +6,7 @@ export const Project = types.model("Project", {
     name: types.string,
     isActive: types.optional(types.boolean, false)
 }).actions((self) => ({
-    changeName(newName: string) {
+    changeName(newName: string): void {
         if (!newName || newName.length == 0) {
             throw new Error("Project Model Action Error: new name should not be empty");
         }
@@ -14,7 +14,7 @@ export const Project = types.model("Project", {
         self.name = newName;
     },
 
-    toggleActive() {
+    toggleActive(): void {
         self.isActive = !self.isActive;
     }
 }));
@@ -22,7 +22,7 @@ export const Project = types.model("Project", {
 const ProjectStore = types.model("ProjectStore", {
     projects: types.array(Project)
 }).actions((self) => ({
-    addProject(newProject: typeof Project.Type) {
+    addProject(newProject: IProject): void {
         if (!newProject.name || newProject.name.length == 0) {
             throw new Error("ProjectStore Model Action Error: new project name should not be empty");
         }
@@ -32,10 +32,10 @@ const ProjectStore = types.model("ProjectStore", {
             id: id,
             name: newProject.name,
             isActive: newProject.isActive
-        } as typeof Project.Type);
+        } as IProject);
     },
 
-    deleteProject(id: number) {
+    deleteProject(id: number): void {
         let index = self.projects.findIndex(project => project.id == id);
         if (index == -1) {
             throw new Error("ProjectStore Model Action Error: project not found");
@@ -45,7 +45,7 @@ const ProjectStore = types.model("ProjectStore", {
     }
 }));
 
-const getUniqueProjectId = (projects: IObservableArray<typeof Project.Type>) => {
+const getUniqueProjectId = (projects: IObservableArray<IProject>) => {
     let id = 0;
     projects.map(project => project.id).forEach((currentId, currentIndex) => {
         if (currentId != currentIndex) {
