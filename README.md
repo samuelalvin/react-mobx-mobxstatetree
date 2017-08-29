@@ -1,2 +1,70 @@
 # react-mobx-mobxstatetree
+## What This Repo Should Be
 A simple application created in React with Mobx and Mobx-State-Tree for learning purpose.
+
+## Installing This Repo
+Simply download and extract this repo and execute these commands in the terminal.
+```
+npm install
+npm start
+```
+Use `npm test` to tests the code using Karma and Jasmine.
+
+## Opening an Issue
+Feel free to open an issue to give a feedback, critique, idea, advice, or anything for the author.
+
+## App Notes
+### Mobx-React
+*1. Injection*
+
+Use `Provider` and `inject` to inject a `props`' property to a react component without the need of passing that `props`' property to the parent components.
+
+### Mobx-State-Tree
+*1. Using interface from Mobx-State-Tree model*
+
+Take `modelA` which is an mobx-state-tree model for example.
+```
+const ModelA = types.model("ModelA", {
+    id: types.number
+});
+```
+Code below shows how to get this `modelA` interface.
+```
+type IModelA = typeof ModelA.Type;
+```
+
+*2. Push a model to an array*
+
+One way to push a model to an array is using the model interface.
+```
+const ModelA = types.model("ModelA", {
+    id: types.number
+});
+
+type IModelA = typeof ModelA.Type;
+
+const ArrModelA = types.model("ArrModelA", {
+    values: types.array(ModelA)
+}).action((self) => ({
+    add(id: number) {
+        self.values.push({
+            id: id
+        } as IModelA);
+    }
+}));
+```
+
+
+### Testing in Jasmine
+*1. Expecting an exception*
+
+Take `functionA` which throw an exception for example.
+```
+functionA() {
+    throw new Error("some random error");
+}
+```
+To catch `functionA`'s exception in Jasmine, use anonymous function.
+```
+expect(() => functionA()).toThrowError();
+```
