@@ -6,6 +6,7 @@ import { IProject } from "../store/project-store";
 
 export interface IProjectListProps {
     project: IProject
+    onDeletion(id: number): void;
 }
 
 @observer
@@ -42,7 +43,8 @@ class ProjectDetails extends React.Component<IProjectListProps> {
         return (
             <li>
                 {this.getProjectForm(project)}
-                <button type="button" onClick={this.toggleEditMode}>edit</button>
+                <button type="button" onClick={this.toggleEditMode}>toggleEdit</button>
+                <button type="button" onClick={(e) => this.props.onDeletion(project.id)}>delete</button>
             </li>
         );
     }

@@ -11,11 +11,22 @@ export interface IProjectListProps {
 @inject("projectStore")
 @observer
 class ProjectList extends React.Component<IProjectListProps> {
+    constructor(props) {
+        super(props);
+
+        this.deleteProject = this.deleteProject.bind(this);
+    }
+
+    deleteProject(id: number): void {
+        const { projectStore } = this.props;
+        projectStore.deleteProject(id);
+    }
+
     render() {
         const { projectStore } = this.props;
         return (
             <ul>
-                {projectStore.projects.map((project) => (<ProjectDetails key={project.id} project={project}></ProjectDetails>))}
+                {projectStore.projects.map((project) => (<ProjectDetails key={project.id} project={project} onDeletion={this.deleteProject}></ProjectDetails>))}
             </ul>
         );
     }

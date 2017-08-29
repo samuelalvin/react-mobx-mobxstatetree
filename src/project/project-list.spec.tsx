@@ -18,15 +18,6 @@ describe("project-list", function () {
         expect(projectList).toBeDefined();
     });
 
-    it("should be rendered without any problem", function () {
-        let renderer = ReactShallowRenderer.createRenderer();
-        renderer.render(<ProjectList projectStore={projectStore}></ProjectList>);
-
-        let result = renderer.getRenderOutput();
-        expect(result).toBeDefined();
-        expect(result.type).toMatch("ul");
-    });
-
     it("should display projects", function(){
         let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
         let projects = TestUtils.scryRenderedDOMComponentsWithTag(projectList, "li");

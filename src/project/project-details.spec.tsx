@@ -10,22 +10,29 @@ const project = Project.create({
 });
 
 describe("project-details", function () {
+    let deleteProject: jasmine.Spy;
+
+    beforeEach(function() {
+        deleteProject = jasmine.createSpy("deleteProject");
+    });
+
     it("should be created without any problem", function () {
-        let projectDetails = TestUtils.renderIntoDocument(<ProjectDetails project={project}></ProjectDetails>) as React.Component;
+        let projectDetails = TestUtils.renderIntoDocument(<ProjectDetails project={project} onDeletion={deleteProject}></ProjectDetails>) as React.Component;
         expect(projectDetails).toBeDefined();
     });
 
     it("should be rendered without any problem", function () {
         let renderer = ReactShallowRenderer.createRenderer();
-        renderer.render(<ProjectDetails project={project}></ProjectDetails>);
+        renderer.render(<ProjectDetails project={project} onDeletion={deleteProject}></ProjectDetails>);
 
         let result = renderer.getRenderOutput();
         expect(result).toBeDefined();
         expect(result.type).toMatch("li");
+        expect((result.props.children[0] as React.ReactElement<any>).type).toMatch("span");
     });
 
     it("should show span on nonEditMode", function () {
-        let projectDetails = TestUtils.renderIntoDocument(<ProjectDetails project={project}></ProjectDetails>) as React.Component;
+        let projectDetails = TestUtils.renderIntoDocument(<ProjectDetails project={project} onDeletion={deleteProject}></ProjectDetails>) as React.Component;
         let span = TestUtils.findRenderedDOMComponentWithTag(projectDetails, "span");
         let inputs = TestUtils.scryRenderedDOMComponentsWithTag(projectDetails, "input");
 
@@ -34,12 +41,22 @@ describe("project-details", function () {
     });
 
     it("should show input on editMode", function () {
-        let projectDetails = TestUtils.renderIntoDocument(<ProjectDetails project={project}></ProjectDetails>) as React.Component;
-        let editButton = TestUtils.findRenderedDOMComponentWithTag(projectDetails, "button");
+        let projectDetails = TestUtils.renderIntoDocument(<ProjectDetails project={project} onDeletion={deleteProject}></ProjectDetails>) as React.Component;
+        let buttons = TestUtils.scryRenderedDOMComponentsWithTag(projectDetails, "button");
+        let editButton = buttons[0];
 
-        TestUtils.Simulate.click(editButton);
+        TestUtils.Simulate.click(buttons[0]);
 
         let inputs = TestUtils.scryRenderedDOMComponentsWithTag(projectDetails, "input");
         expect(inputs.length).toBeGreaterThan(0);
+    });
+
+    it("should be able to delete a project", function () {
+        let projectDetails = TestUtils.renderIntoDocument(<ProjectDetails project={project} onDeletion={deleteProject}></ProjectDetails>) as React.Component;
+        let buttons = TestUtils.scryRenderedDOMComponentsWithTag(projectDetails, "button");
+        let deleteButton = buttons[1];
+
+        TestUtils.Simulate.click(deleteButton);
+        expect(deleteProject).toHaveBeenCalledTimes(1);
     });
 });
