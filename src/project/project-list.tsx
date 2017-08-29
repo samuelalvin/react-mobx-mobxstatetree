@@ -1,7 +1,7 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
 
-import ProjectStore, { IProjectStore } from "../store/project-store";
+import ProjectStore, { IProjectStore, Project, IProject } from "../store/project-store";
 import ProjectDetails from "./project-details";
 
 export interface IProjectListProps {
@@ -11,10 +11,23 @@ export interface IProjectListProps {
 @inject("projectStore")
 @observer
 class ProjectList extends React.Component<IProjectListProps> {
+    private newProject: IProject;
+
     constructor(props) {
         super(props);
 
+        this.newProject = Project.create({
+            id: -1,
+            name: ""
+        });
+
         this.deleteProject = this.deleteProject.bind(this);
+        this.addProject = this.addProject.bind(this);
+    }
+
+    addProject(newProject: IProject): void {
+        const { projectStore } = this.props;
+        projectStore.addProject(newProject);
     }
 
     deleteProject(id: number): void {
@@ -25,9 +38,16 @@ class ProjectList extends React.Component<IProjectListProps> {
     render() {
         const { projectStore } = this.props;
         return (
-            <ul>
-                {projectStore.projects.map((project) => (<ProjectDetails key={project.id} project={project} onDeletion={this.deleteProject}></ProjectDetails>))}
-            </ul>
+            <div>
+                <ul>
+                    {projectStore.projects.map((project) => (<ProjectDetails key={project.id} project={project} onDeletion={this.deleteProject}></ProjectDetails>))}
+                </ul>
+                <div>
+                    <input type="text" value={this.newProject.name} onChange={(e) => this.newProject.changeName(e.target.value)} />
+                    <input type="checkbox" checked={this.newProject.isActive} onChange={(e) => this.newProject.toggleActive()} />
+                </div>
+                <button type="button" onClick={(e) => this.addProject(this.newProject)}>add project</button>
+            </div>
         );
     }
 }
