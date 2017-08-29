@@ -1,11 +1,11 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
 
-import ProjectStore from "../store/project-store";
+import ProjectStore, { IProjectStore } from "../store/project-store";
 import ProjectDetails from "./project-details";
 
 export interface IProjectListProps {
-    projectStore?: typeof ProjectStore.Type
+    projectStore?: IProjectStore
 }
 
 @inject("projectStore")

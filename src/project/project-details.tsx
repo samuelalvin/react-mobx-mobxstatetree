@@ -2,10 +2,10 @@ import * as React from "react";
 import { observer } from "mobx-react";
 import { observable } from "mobx";
 
-import { Project } from "../store/project-store";
+import { IProject } from "../store/project-store";
 
 export interface IProjectListProps {
-    project: typeof Project.Type
+    project: IProject
 }
 
 @observer
@@ -22,7 +22,7 @@ class ProjectDetails extends React.Component<IProjectListProps> {
         this.editMode = !this.editMode;
     }
 
-    getProjectForm(project: typeof Project.Type): JSX.Element {
+    getProjectForm(project: IProject): JSX.Element {
         if (this.editMode) {
             return (
                 <div>

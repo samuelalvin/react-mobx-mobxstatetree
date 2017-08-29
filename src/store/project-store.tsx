@@ -8,8 +8,7 @@ export const Project = types.model("Project", {
 }).actions((self) => ({
     changeName(newName: string) {
         if (!newName || newName.length == 0) {
-            alert("Project Model Action Error: new name should not be empty");
-            return;
+            throw new Error("Project Model Action Error: new name should not be empty");
         }
 
         self.name = newName;
@@ -25,8 +24,7 @@ const ProjectStore = types.model("ProjectStore", {
 }).actions((self) => ({
     addProject(newProject: typeof Project.Type) {
         if (!newProject.name || newProject.name.length == 0) {
-            alert("ProjectStore Model Action Error: new project name should not be empty");
-            return;
+            throw new Error("ProjectStore Model Action Error: new project name should not be empty");
         }
 
         let id = getUniqueProjectId(self.projects);
@@ -40,8 +38,7 @@ const ProjectStore = types.model("ProjectStore", {
     deleteProject(id: number) {
         let index = self.projects.findIndex(project => project.id == id);
         if (index == -1) {
-            alert("ProjectStore Model Action Error: project not found");
-            return;
+            throw new Error("ProjectStore Model Action Error: project not found");
         }
 
         self.projects.splice(index, 1);
@@ -49,13 +46,10 @@ const ProjectStore = types.model("ProjectStore", {
 }));
 
 const getUniqueProjectId = (projects: IObservableArray<typeof Project.Type>) => {
-    let id = projects
-    .map(project => project.id)
-    .reduce((previousId, currentId, currentIndex) => {
-        if (currentId == currentIndex) {
-            return previousId;
-        } else {
-            return currentIndex;
+    let id = 0;
+    projects.map(project => project.id).forEach((currentId, currentIndex) => {
+        if (currentId != currentIndex) {
+            id = currentIndex;
         }
     });
 
@@ -65,5 +59,9 @@ const getUniqueProjectId = (projects: IObservableArray<typeof Project.Type>) => 
 
     return id;
 };
+
+export type IProject = typeof Project.Type;
+
+export type IProjectStore = typeof ProjectStore.Type;
 
 export default ProjectStore;
