@@ -43,10 +43,10 @@ class ProjectList extends React.Component<IProjectListProps> {
                     {projectStore.projects.map((project) => (<ProjectDetails key={project.id} project={project} onDeletion={this.deleteProject}></ProjectDetails>))}
                 </ul>
                 <div>
-                    <input type="text" value={this.newProject.name} onChange={(e) => this.newProject.changeName(e.target.value)} />
-                    <input type="checkbox" checked={this.newProject.isActive} onChange={(e) => this.newProject.toggleActive()} />
+                    <input name="newProjectNameInput" type="text" value={this.newProject.name} onChange={(e) => this.newProject.changeName(e.target.value)} />
+                    <input name="newProjectStatusInput" type="checkbox" checked={this.newProject.isActive} onChange={(e) => this.newProject.toggleActive()} />
                 </div>
-                <button type="button" onClick={(e) => this.addProject(this.newProject)}>add project</button>
+                <button name="addProjectButton" type="button" onClick={(e) => this.addProject(this.newProject)}>add project</button>
             </div>
         );
     }

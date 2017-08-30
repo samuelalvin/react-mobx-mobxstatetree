@@ -1,8 +1,8 @@
 import * as React from "react";
-import * as TestUtils from "react-dom/test-utils";
 import * as ReactShallowRenderer from "react-test-renderer/shallow";
 import ProjectList, { IProjectListProps } from "./project-list";
 import ProjectStore, { IProject } from "../store/project-store";
+import TestUtilsExtended from "../lib/react-test-utils-extended";
 
 const projectStore = ProjectStore.create({
     projects: [{
@@ -14,13 +14,32 @@ const projectStore = ProjectStore.create({
 
 describe("project-list", function () {
     it("should be created without any problem", function () {
-        let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
+        let projectList = TestUtilsExtended.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
         expect(projectList).toBeDefined();
     });
 
     it("should display projects", function(){
-        let projectList = TestUtils.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
-        let projects = TestUtils.scryRenderedDOMComponentsWithTag(projectList, "li");
+        let projectList = TestUtilsExtended.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
+        let projects = TestUtilsExtended.scryRenderedDOMComponentsWithTag(projectList, "li");
         expect(projects.length).toEqual(projectStore.projects.length);
+    });
+
+    it("should be able to add a project", function() {
+        let projectList = TestUtilsExtended.renderIntoDocument(<ProjectList projectStore={projectStore}></ProjectList>) as React.Component;
+        let nameInput = TestUtilsExtended.findRenderedDOMComponentsWithName(projectList, "newProjectNameInput");
+        let checkBoxInput = TestUtilsExtended.findRenderedDOMComponentsWithName(projectList, "newProjectStatusInput");
+        let addButton = TestUtilsExtended.findRenderedDOMComponentsWithName(projectList, "addProjectButton");
+        let projects = TestUtilsExtended.scryRenderedDOMComponentsWithTag(projectList, "li");
+        expect(projects.length).toEqual(1);
+
+        TestUtilsExtended.Simulate.change(nameInput, {
+            target: {
+                value : "debugProject2"
+            }
+        } as any);
+        TestUtilsExtended.Simulate.click(addButton);
+
+        projects = TestUtilsExtended.scryRenderedDOMComponentsWithTag(projectList, "li");
+        expect(projects.length).toEqual(2);
     });
 });
