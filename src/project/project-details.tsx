@@ -27,8 +27,8 @@ class ProjectDetails extends React.Component<IProjectListProps> {
         if (this.editMode) {
             return (
                 <div>
-                    <input type="text" value={project.name} onChange={(e) => project.changeName(e.target.value)} />
-                    <input type="checkbox" checked={project.isActive} onChange={(e) => project.toggleActive()} />
+                    <label>Project Name: <input type="text" value={project.name} onChange={(e) => project.changeName(e.target.value)} /></label>
+                    <label>Project Status: <input type="checkbox" checked={project.isActive} onChange={(e) => project.toggleActive()} /></label>
                 </div>
             );
         }
