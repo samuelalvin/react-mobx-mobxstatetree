@@ -45,7 +45,7 @@ export const ProjectStore = types.model("ProjectStore", {
     }
 }));
 
-const getUniqueProjectId = (projects: IObservableArray<IProject>) => {
+function getUniqueProjectId (projects: IObservableArray<IProject>): number {
     let id = 0;
     projects.map(project => project.id).forEach((currentId, currentIndex) => {
         if (currentId != currentIndex) {
