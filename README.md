@@ -54,6 +54,35 @@ const ArrModelA = types.model("ArrModelA", {
 }));
 ```
 
+*3. Handling model update on async action*
+
+When an action is async and its callback function update the model (example code shown below), a `Cannot modify '{the model}', the object is protected and can only be modified by using an action` error will be thrown.
+```
+const someModel = types.model("someModel", {
+    name: types.string
+}).action((self) => ({
+    changeNameAsync() {
+        someAsyncMethod().then(name => {
+            self.name = name; // Error will be thrown because of this statement;
+        });
+    }
+}));
+```
+This problem can be solved by using another action as the callback function.
+```
+const someModel = types.model("someModel", {
+    name: types.string
+}).action((self) => ({
+    changeNameAsync() {
+        someAsyncMethod().then((this as typeof someModel.Type).changeName);
+    },
+    
+    changeName(name) {
+        self.name = name;
+    }
+}));
+```
+
 
 ### Testing in Jasmine
 *1. Expecting an exception*
