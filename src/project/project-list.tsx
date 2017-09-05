@@ -1,7 +1,7 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
 
-import ProjectStore, { IProjectStore, Project, IProject } from "../store/project-store";
+import { IProjectStore, Project, IProject } from "../store/project-store";
 import ProjectDetails from "./project-details";
 
 export interface IProjectListProps {

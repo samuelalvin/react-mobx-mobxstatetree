@@ -19,7 +19,7 @@ export const Project = types.model("Project", {
     }
 }));
 
-const ProjectStore = types.model("ProjectStore", {
+export const ProjectStore = types.model("ProjectStore", {
     projects: types.array(Project)
 }).actions((self) => ({
     addProject(newProject: IProject): void {
@@ -64,4 +64,12 @@ export type IProject = typeof Project.Type;
 
 export type IProjectStore = typeof ProjectStore.Type;
 
-export default ProjectStore;
+const projectStore = ProjectStore.create({
+    projects: [{
+        id: 0,
+        name: "debugProject1",
+        isActive: true
+    } as typeof Project.Type]
+});
+
+export default projectStore;

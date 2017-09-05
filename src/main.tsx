@@ -3,15 +3,7 @@ import * as ReactDOM from "react-dom";
 import App from "./app/app"
 import { Provider } from "mobx-react";
 
-import ProjectStore, { Project } from "./store/project-store";
-
-const projectStore = ProjectStore.create({
-    projects: [{
-        id: 0,
-        name: "debugProject1",
-        isActive: true
-    } as typeof Project.Type]
-});
+import projectStore, { Project } from "./store/project-store";
 
 const mainApp = (
     <Provider projectStore={projectStore}>

@@ -1,5 +1,5 @@
 import ProjectList from "../project/project-list";
-import ProjectStore, { IProject } from "../store/project-store";
+import { ProjectStore, IProject } from "../store/project-store";
 
 const initializeProjectStore = () => {
     return ProjectStore.create({
