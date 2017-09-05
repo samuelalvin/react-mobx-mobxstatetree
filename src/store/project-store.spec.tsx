@@ -1,7 +1,7 @@
 import ProjectList from "../project/project-list";
-import { ProjectStore, IProject } from "../store/project-store";
+import { ProjectStore, IProjectStore, IProject } from "../store/project-store";
 
-const initializeProjectStore = () => {
+function initializeProjectStore(): IProjectStore {
     return ProjectStore.create({
         projects: [{
             id: 0,

@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as ReactShallowRenderer from "react-test-renderer/shallow";
 import ProjectList, { IProjectListProps } from "./project-list";
-import { ProjectStore, IProject } from "../store/project-store";
+import { ProjectStore, IProjectStore, IProject } from "../store/project-store";
 import TestUtilsExtended from "../lib/react-test-utils-extended";
 
-const initializeProjectStore = () => {
+function initializeProjectStore(): IProjectStore {
     return ProjectStore.create({
         projects: [{
             id: 0,
