@@ -11,7 +11,7 @@ npm start
 Use `npm test` to tests the code using Karma and Jasmine.
 
 ## Opening an Issue
-Feel free to open an issue to give a feedback, critique, idea, advice, or anything for the author.
+Feel free to open an issue to give a feedback, critique, idea, advice, or anything to the author.
 
 ## App Notes
 ### Mobx-React
