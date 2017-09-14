@@ -1,6 +1,6 @@
 # react-mobx-mobxstatetree
-## What This Repo Should Be
-A simple application created in React with Mobx and Mobx-State-Tree for learning purpose.
+## What This Repo Is
+A simple application created in React with Mobx and Mobx-State-Tree for learning purpose. Its integration with Redux-DevTools can be found [here](https://github.com/samuelalvin/react-mobx-mobxstatetree/tree/master/examples/redux-devtools-implementation).
 
 ## Installing This Repo
 Simply download and extract this repo and execute these commands in the terminal.
