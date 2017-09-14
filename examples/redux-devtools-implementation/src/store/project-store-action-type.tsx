@@ -1,0 +1,4 @@
+export const ADD_PROJECT = "ADD_PROJECT";
+export const DELETE_PROJECT = "DELETE_PROJECT";
+export const CHANGE_NAME = "CHANGE_NAME";
+export const TOGGLE_ACTIVE = "TOGGLE_ACTIVE";

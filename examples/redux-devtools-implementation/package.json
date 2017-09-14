@@ -1,7 +1,7 @@
 {
-  "name": "react-mobx-mobxstatetree",
+  "name": "redux-devtools-implementation",
   "version": "1.0.0",
-  "description": "A simple application created in React with Mobx and Mobx-State-Tree for learning purpose.",
+  "description": "A Mobx-State-Tree store integrated with Redux-DevTools.",
   "scripts": {
     "build": "node ./node_modules/webpack/bin/webpack.js",
     "serve": "lite-server -c=bs-config.json",
@@ -11,13 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/samuelalvin/react-mobx-mobxstatetree"
+    "url": "https://github.com/samuelalvin/react-mobx-mobxstatetree/tree/master/examples/redux-devtools-implementation"
   },
   "keywords": [
     "reactjs",
     "mobx",
     "mobx-react",
     "mobx-state-tree",
+    "redux-devtools",
     "typescript"
   ],
   "author": "Samuel Hutama",
@@ -31,7 +32,10 @@
     "mobx-state-tree": "^0.10.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1"
+    "react-redux": "^5.0.6",
+    "react-test-renderer": "^15.6.1",
+    "redux": "^3.7.2",
+    "remotedev": "^0.2.7"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.54",
