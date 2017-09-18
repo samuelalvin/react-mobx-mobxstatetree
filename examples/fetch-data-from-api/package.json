@@ -1,0 +1,54 @@
+{
+  "name": "fetch-data-from-api",
+  "version": "1.0.0",
+  "description": "Fetch data from API to a Mobx-State-Tree store.",
+  "scripts": {
+    "build": "node ./node_modules/webpack/bin/webpack.js && tsc",
+    "prestart": "npm run build",
+    "start": "nodemon ./startup.js",
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samuelalvin/react-mobx-mobxstatetree/tree/master/examples/fetch-data-from-api"
+  },
+  "keywords": [
+    "reactjs",
+    "mobx",
+    "mobx-react",
+    "mobx-state-tree",
+    "expressjs",
+    "mvc",
+    "typescript"
+  ],
+  "author": "Samuel Hutama",
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^16.0.3",
+    "@types/react-dom": "^15.5.4",
+    "@types/react-test-renderer": "^15.5.4",
+    "express": "^4.15.4",
+    "mobx": "^3.2.2",
+    "mobx-react": "^4.2.2",
+    "mobx-state-tree": "^0.10.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
+    "vash": "^0.12.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.37",
+    "@types/jasmine": "^2.5.54",
+    "@types/node": "^8.0.28",
+    "jasmine-core": "^2.7.0",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-webpack": "^2.0.4",
+    "nodemon": "^1.12.1",
+    "ts-loader": "^2.3.3",
+    "typescript": "^2.4.2",
+    "typescript-compiler": "^1.4.1-2",
+    "webpack": "^3.5.5"
+  }
+}
