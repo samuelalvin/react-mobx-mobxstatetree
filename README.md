@@ -1,6 +1,6 @@
 # react-mobx-mobxstatetree
 ## What This Repo Is
-A simple application created in React with Mobx and Mobx-State-Tree for learning purpose. Its integration with Redux-DevTools can be found [here](https://github.com/samuelalvin/react-mobx-mobxstatetree/tree/master/examples/redux-devtools-implementation).
+A simple application created in React with Mobx and Mobx-State-Tree for learning purpose. Its integration with Redux-DevTools can be found [here](https://github.com/samuelalvin/react-mobx-mobxstatetree/tree/master/examples/redux-devtools-implementation). Example of fetching data from an API can be found [here](https://github.com/samuelalvin/react-mobx-mobxstatetree/tree/master/examples/fetch-data-from-api).
 
 ## Installing This Repo
 Simply download and extract this repo and execute these commands in the terminal.
