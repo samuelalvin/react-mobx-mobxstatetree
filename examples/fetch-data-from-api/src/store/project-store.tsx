@@ -1,5 +1,6 @@
 import { IObservableArray } from "mobx";
 import { types } from "mobx-state-tree";
+import * as fetch from "isomorphic-fetch";
 
 export const Project = types.model("Project", {
     id: types.number,
@@ -22,6 +23,17 @@ export const Project = types.model("Project", {
 export const ProjectStore = types.model("ProjectStore", {
     projects: types.array(Project)
 }).actions((self) => ({
+    async getProjects(): Promise<IObservableArray<IProject>> {
+        let response = await fetch("/api/projects");
+        let projects = await response.json() as IObservableArray<IProject>;
+        return (self as IProjectStore).loadProjects(projects);
+    },
+
+    loadProjects(projects: IObservableArray<IProject>): IObservableArray<IProject> {
+        self.projects = projects;
+        return self.projects;
+    },
+
     addProject(newProject: IProject): void {
         if (!newProject.name || newProject.name.length == 0) {
             throw new Error("ProjectStore Model Action Error: new project name should not be empty");
@@ -69,7 +81,7 @@ const projectStore = ProjectStore.create({
         id: 0,
         name: "debugProject1",
         isActive: true
-    } as typeof Project.Type]
+    } as IProject]
 });
 
 export default projectStore;

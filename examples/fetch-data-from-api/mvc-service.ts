@@ -4,7 +4,7 @@ import "vash";
 
 import { HomeController } from "./controllers/home-controller";
 
-import { TodoApiController } from "./controllers/api/todo-api-controller";
+import { ProjectApiController } from "./controllers/api/project-api-controller";
 
 export class MvcService {
     constructor(private app: Express) { }
@@ -25,6 +25,6 @@ export class MvcService {
     }
 
     private initializeApiControllers(): void {
-        this.app.use("/api/todos", new TodoApiController().setupRoute());
+        this.app.use("/api/projects", new ProjectApiController().setupRoute());
     }
 }

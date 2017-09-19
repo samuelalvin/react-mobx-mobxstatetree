@@ -9,6 +9,7 @@
         "target": "es5",
         "types": [
             "@types/express",
+            "@types/isomorphic-fetch",
             "@types/node",
             "@types/react",
             "@types/react-dom",
